@@ -1,4 +1,4 @@
-# A Tiempo | Alertas tempranas para la permanencia escolar
+# A Tiempo | Borrador de la propuesta
 
 **Estado · Paso 2 en revisión.** El guion oral y el del video se integrarán después de revisar la evidencia y la historia con el equipo. [Plan de entregas](plan_hackathon.md) · [Investigación y señales](investigacion_y_senales.md) · [Origen de los datos](origen_de_datos.md) · [Propuesta base](propuesta_a_tiempo.md)
 
@@ -19,7 +19,7 @@
 
 A Tiempo reúne las dos señales y le indica a la docente qué registros revisar. Ella comprueba las fechas e invita a Daniela a conversar en privado. Daniela explica que su turno de trabajo cambió y que quiere ponerse al día. Juntas acuerdan un plan para recuperar las dos actividades. La docente deja una fecha para revisar si el plan le está sirviendo.
 
-El cambio que verá el jurado es concreto. El plantel pasa de tener dos registros separados a contar con una conversación y un seguimiento acordado mientras Daniela sigue inscrita.
+La lista de asistencia muestra las faltas de Daniela y el registro de entregas muestra las dos actividades pendientes. Al revisar ambas señales juntas, la docente puede conversar con Daniela y acordar un seguimiento mientras sigue inscrita.
 
 ## Alcance de la propuesta para presentar al equipo
 
@@ -32,6 +32,12 @@ El guion incluirá texto hablado, duración por bloque, señales de cambio de di
 ## Pitch para el video · Por desarrollar en el paso 5
 
 Recorrido inicial de cuatro pantallas. **Bandeja del docente → detalle de la alerta con fechas → recomendación para el docente → apoyo y seguimiento acordados.** El guion incluirá voz en off, textos y tiempos por escena. La pantalla usará el código ficticio `A-104`. La historia puede nombrar a Daniela en la narración.
+
+La bandeja y el detalle muestran el código por defecto. El docente autorizado puede usar **Mostrar nombre** en la ficha que está revisando y volver a ocultarlo. Al cambiar de caso, el nombre se oculta de nuevo. En el video se pueden dejar visibles solo los códigos.
+
+La bandeja distingue casos que se abren al revisar registros escolares de solicitudes o reportes que llegan al docente. El primer grupo incluye asistencia, rezago, reinscripción y fechas de evaluación. El segundo permite consultar rutas de apoyo por horarios laborales, transporte, cuidados o adaptación. Los reportes sensibles muestran el canal institucional y mantienen los detalles en el expediente correspondiente.
+
+Cada ficha explica **cómo llegaron los datos**, **qué recibió A Tiempo**, **por qué se abrió el caso** y **qué puede hacer el docente**. En el caso ficticio de `A-104`, el plantel facilita el pase de lista y el reporte de entregas. La regla ilustrativa compara dos cortes de diez clases y abre una revisión si las faltas aumentan en dos o más. Aquí pasaron de una a cuatro. Las dos entregas pendientes aportan contexto. La docente verifica las capturas y conversa en privado. Cuando Daniela confirma que cambió su turno laboral, la docente puede consultar qué ajustes autoriza el plantel y acordar un seguimiento.
 
 Ejemplo de consulta desde la cuenta docente: «¿Qué cambió en la asistencia de A-104 y qué registros conviene revisar?». El agente responde en esa misma cuenta con los datos disponibles y una sugerencia para el docente.
 

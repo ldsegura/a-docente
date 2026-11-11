@@ -1,15 +1,15 @@
 # A Tiempo | Plan del hackathon
 
-**Paso actual · 2 de 6, en revisión.** Cada paso termina con una pausa para incorporar tus comentarios o archivos. Los documentos de trabajo se integrarán en [el guion final](guion_final_a_tiempo.md) al cierre.
+**Paso actual · 2 de 6, en revisión.** Cada paso termina con una pausa para incorporar tus comentarios o archivos. Al cierre, el [borrador de la propuesta](borrador_propuesta_a_tiempo.md) se convertirá en el guion de entrega.
 
 | Paso | Entregable | Qué revisamos antes de avanzar |
 |---|---|---|
-| 1. Acordar la propuesta | Este plan, [matriz inicial de señales](investigacion_y_senales.md) y [borrador del guion final](guion_final_a_tiempo.md). | Qué problema resolvemos, quién atiende la alerta y qué cambio queremos mostrar. |
+| 1. Acordar la propuesta | Este plan, [matriz inicial de señales](investigacion_y_senales.md) y [borrador de la propuesta](borrador_propuesta_a_tiempo.md). | Qué problema resolvemos, quién atiende la alerta y qué cambio queremos mostrar. |
 | 2. Investigar señales, apoyos y origen de datos | [Revisión de los materiales del equipo](investigacion_y_senales.md) y [opciones para reutilizar registros](origen_de_datos.md). | Si la demo parte de un reporte escolar simulado y qué acción debe mostrar que aporta valor al asesor. La disponibilidad real se confirma con un plantel. |
 | 3. Construir la historia | `historia_y_propuesta.md` con título, descripción, propuesta de valor, historia para entregar a jueces y respuestas a sus principales objeciones. | Si el caso se entiende sin explicación técnica y si el cambio que vive el estudiante es creíble. |
 | 4. Escribir el pitch oral | `pitch_jurado.md` con guion palabra por palabra, tiempos, diapositivas y cierre. Meta de 4:30 a 4:45 con margen hasta el máximo de 5:00. | Si el problema, el papel de la IA, el beneficio y el pedido final caben en el tiempo. |
 | 5. Escribir el pitch del video | `guion_video_demo.md` con voz en off, escenas, pantallas y textos. Propuesta inicial de 75 a 90 segundos, sujeta a las bases. | Si el recorrido se entiende sin explicación en vivo y se distingue qué hace la app y qué decide el asesor. |
-| 6. Cerrar la entrega | Completar `guion_final_a_tiempo.md` con las versiones aprobadas, fuentes, preguntas del jurado y lista de preparación. | Que los dos guiones y la historia cuenten el mismo caso, respeten el tiempo y hagan promesas que podamos defender. |
+| 6. Cerrar la entrega | Consolidar las versiones aprobadas a partir de `borrador_propuesta_a_tiempo.md` e integrar fuentes, preguntas del jurado y lista de preparación. | Que los dos guiones y la historia cuenten el mismo caso, respeten el tiempo y hagan promesas que podamos defender. |
 
 ## Qué entregamos al hackathon
 
