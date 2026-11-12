@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196 48" role="img" aria-labelledby="title">
+  <title id="title">Lumina</title>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5B50E8"/><stop offset="1" stop-color="#2F7FCB"/></linearGradient></defs>
+  <rect x="2" y="2" width="44" height="44" rx="15" fill="url(#g)"/>
+  <path d="M24 10.5 27.3 20.7 37.5 24l-10.2 3.3L24 37.5l-3.3-10.2L10.5 24l10.2-3.3L24 10.5Z" fill="#fff"/>
+  <circle cx="35.5" cy="12.5" r="2" fill="#BDF8DF"/>
+  <text x="57" y="34" fill="#172554" font-family="Nunito, Avenir Next, Arial, sans-serif" font-size="31" font-weight="800" letter-spacing="-1.7">lumina</text>
+</svg>

@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba interactiva — Lumina</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        @media (min-width: 768px) {
+            .app-container {
+                min-height: 92vh;
+                margin-top: 2vh;
+                margin-bottom: 2vh;
+                border-radius: 2rem;
+                overflow: hidden;
+                border: 8px solid #1f2937;
+            }
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out forwards;
+        }
+        .return-link:focus-visible { outline: 3px solid #fbbf24; outline-offset: 3px; }
+        .embedded body { padding: 0 !important; }
+        .embedded .app-container { height: 100dvh; min-height: 0; margin: 0 auto; }
+        .embedded .app-container main { min-height: 0; }
+        .embedded .return-link { display: none; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embedded');</script>
+</head>
+<body class="bg-slate-900 md:py-4 flex justify-center items-center">
+
+    <!-- Mockup de App Móvil -->
+    <div class="app-container w-full relative">
+
+        <!-- Barra de Estado Simulada del Celular -->
+        <div class="bg-slate-900 text-white px-6 pt-3 pb-2 flex justify-between items-center text-xs font-semibold z-20 select-none">
+            <span>9:41</span>
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-signal"></i>
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-full text-green-400"></i>
+            </div>
+        </div>
+
+        <!-- Cabecera de la Aplicación -->
+        <header class="bg-slate-900 text-white px-5 pb-4 pt-1 shadow-md z-10 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="index.html#inicio" class="return-link w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-white" aria-label="Volver a la landing de Lumina" title="Volver a la landing">
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                </a>
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-blue-500 flex items-center justify-center text-white shadow-lg">
+                    <i class="fas fa-user-graduate text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-base leading-tight">Prueba de Lumina</h1>
+                    <p class="text-xs text-slate-400">Prototipo interactivo</p>
+                </div>
+            </div>
+            <button onclick="switchTab('info')" class="text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 transition">
+                <i class="fas fa-shield-alt text-lg"></i>
+            </button>
+        </header>
+
+        <!-- Contenedor Principal con Scroll -->
+        <main class="flex-1 overflow-y-auto hide-scrollbar p-4 bg-slate-50 pb-24">
+            <div class="rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 mb-4 text-[11px] leading-relaxed text-amber-950" role="note">
+                <strong>Prueba con datos ficticios.</strong> Las puntuaciones son ilustrativas y no están validadas. No ingreses información real de estudiantes ni uses esta maqueta para tomar decisiones.
+            </div>
+
+            <!-- Pestaña 1: Formulario de Evaluación -->
+            <div id="tab-eval" class="tab-content fade-in">
+                <!-- Banner Informativo / Bienvenida -->
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-4 text-white mb-5 shadow-sm">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <span class="bg-blue-500/40 text-blue-100 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full">Diagnóstico Predictivo</span>
+                            <h2 class="text-lg font-bold mt-1">Evaluación de Riesgo</h2>
+                            <p class="text-xs text-blue-100 mt-1 opacity-90">Completa los campos para calcular el riesgo de abandono escolar e identificar estrategias de apoyo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="assessmentForm" onsubmit="calculateRisk(event)" class="space-y-4">
+                    
+                    <!-- Datos del Estudiante (Opcionales para registro) -->
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+                        <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fas fa-id-card text-indigo-500"></i> Identificación del Estudiante
+                        </h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Nombre / ID</label>
+                                <input type="text" id="studentName" placeholder="Ej. Juan P." class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-indigo-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Semestre</label>
+                                <select id="semester" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-indigo-500 bg-white">
+                                    <option value="1">1er Semestre</option>
+                                    <option value="2">2do Semestre</option>
+                                    <option value="3">3er Semestre</option>
+                                    <option value="4">4to Semestre</option>
+                                    <option value="5">5to Semestre</option>
+                                    <option value="6">6to Semestre</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bloque 1: Desempeño Académico -->
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+                        <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fas fa-book-open text-blue-500"></i> Factor Académico
+                        </h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <label class="text-xs font-medium text-slate-700">Promedio General Anterior</label>
+                                    <span id="gpaVal" class="text-xs font-bold text-indigo-600">7.5</span>
+                                </div>
+                                <input type="range" id="gpa" min="5.0" max="10.0" step="0.1" value="7.5" oninput="document.getElementById('gpaVal').innerText = this.value" class="w-full accent-indigo-600 h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer">
+                                <div class="flex justify-between text-[10px] text-slate-400 mt-0.5">
+                                    <span>5.0 (Deficiente)</span>
+                                    <span>10.0 (Excelente)</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Inasistencias acumuladas (último mes)</label>
+                                <select id="attendance" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-indigo-500 bg-white">
+                                    <option value="0">Menos del 10% (Asistencia regular)</option>
+                                    <option value="1">10% - 20% (Faltas ocasionales)</option>
+                                    <option value="2">21% - 40% (Inasistencia moderada)</option>
+                                    <option value="3">Más del 40% (Inasistencia severa)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Materias reprobadas acumuladas</label>
+                                <select id="failedSubjects" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-indigo-500 bg-white">
+                                    <option value="0">Ninguna</option>
+                                    <option value="1">1 a 2 materias</option>
+                                    <option value="2">3 a 4 materias</option>
+                                    <option value="3">5 o más materias</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bloque 2: Situación Socioeconómica y Laboral -->
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+                        <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fas fa-briefcase text-emerald-500"></i> Factor Socioeconómico y Laboral
+                        </h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Jornada Laboral del Estudiante</label>
+                                <select id="workStatus" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-indigo-500 bg-white">
+                                    <option value="none">No trabaja (Dedicación exclusiva a estudio)</option>
+                                    <option value="part">Trabaja medio tiempo (&lt; 20 hrs/semana)</option>
+                                    <option value="full">Trabaja tiempo completo (&ge; 20 hrs/semana)</option>
+                                    <option value="informal">Trabajo informal / Eventual</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Lugar de residencia y traslado</label>
+                                <select id="commute" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-indigo-500 bg-white">
+                                    <option value="close">Cercano al plantel (&lt; 30 min de traslado)</option>
+                                    <option value="medium">Distancia media (30 a 60 min de traslado)</option>
+                                    <option value="far">Zona distante / Rural (&gt; 1 hora o múltiples transportes)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Ingreso o estabilidad económica familiar</label>
+                                <select id="economicStatus" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-indigo-500 bg-white">
+                                    <option value="stable">Suficiente para insumos escolares</option>
+                                    <option value="moderate">Dificultades económicas ocasionales</option>
+                                    <option value="severe">Carestía severa / Dependencia de ingresos propios</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bloque 3: Entorno Familiar y Socioemocional -->
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+                        <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fas fa-heart text-rose-500"></i> Apoyo Familiar y Red Social
+                        </h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Nivel de respaldo/apoyo familiar</label>
+                                <select id="familySupport" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-indigo-500 bg-white">
+                                    <option value="high">Alto apoyo y seguimiento constante</option>
+                                    <option value="moderate">Apoyo moderado o intermitente</option>
+                                    <option value="low">Poco o nulo apoyo familiar / Conflictos familiares</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Responsabilidades de cuidado en el hogar</label>
+                                <select id="caregiving" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-indigo-500 bg-white">
+                                    <option value="none">Sin cargas familiares extraordinarias</option>
+                                    <option value="moderate">Cuidado ocasional de hermanos/familiares</option>
+                                    <option value="heavy">Cuidado permanente de hijos, enfermos o adultos mayores</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nota Ética Breve en Formulario -->
+                    <div class="p-3 bg-amber-50 rounded-xl border border-amber-100 text-[11px] text-amber-800 flex items-start space-x-2">
+                        <i class="fas fa-info-circle text-amber-600 mt-0.5 flex-shrink-0"></i>
+                        <span>
+                            <strong>Nota de neutralidad:</strong> Atributos personales protegidos (como orientación sexual, identidad de género o características étnico-culturales) <strong>no se recopilan ni intervienen</strong> en el cálculo del algoritmo.
+                        </span>
+                    </div>
+
+                    <!-- Botón de Acción -->
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] text-white font-semibold py-3.5 px-4 rounded-xl shadow-lg shadow-indigo-200 transition flex items-center justify-center space-x-2 text-sm">
+                        <i class="fas fa-calculator"></i>
+                        <span>Calcular Riesgo y Generar Alerta</span>
+                    </button>
+
+                </form>
+            </div>
+
+            <!-- Pestaña 2: Resultado y Alerta Temprana (Oculto por defecto) -->
+            <div id="tab-result" class="tab-content hidden fade-in">
+                
+                <!-- Encabezado del Resultado -->
+                <div class="flex items-center justify-between mb-4">
+                    <button onclick="switchTab('eval')" class="text-xs text-indigo-600 font-semibold flex items-center gap-1 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm">
+                        <i class="fas fa-arrow-left"></i> Nueva evaluación
+                    </button>
+                    <span id="evalDate" class="text-[11px] text-slate-400 font-medium"></span>
+                </div>
+
+                <!-- Tarjeta Principal de Nivel de Riesgo -->
+                <div id="riskCard" class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 text-center mb-4 relative overflow-hidden">
+                    <div id="riskBanner" class="absolute top-0 left-0 right-0 h-2 bg-slate-300"></div>
+                    
+                    <span class="text-[11px] font-bold tracking-wider text-slate-400 uppercase">Diagnóstico Estimado</span>
+                    <h3 id="studentDisplayName" class="text-base font-bold text-slate-800 mt-0.5">Estudiante Evaluado</h3>
+                    
+                    <!-- Anillo / Semáforo de Riesgo -->
+                    <div class="my-4 flex flex-col items-center justify-center">
+                        <div class="relative w-32 h-32 flex items-center justify-center">
+                            <canvas id="riskGaugeCanvas" width="128" height="128"></canvas>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span id="riskScoreNum" class="text-3xl font-extrabold text-slate-800">0</span>
+                                <span class="text-[10px] text-slate-400 uppercase font-bold">de 100 pts</span>
+                            </div>
+                        </div>
+                        <div id="riskBadge" class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                            <!-- Inyectado dinámicamente -->
+                        </div>
+                    </div>
+
+                    <p id="riskDescription" class="text-xs text-slate-600 leading-relaxed px-2">
+                        <!-- Inyectado dinámicamente -->
+                    </p>
+                </div>
+
+                <!-- Desglose de Factores Identificados -->
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 mb-4">
+                    <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3 flex items-center gap-2">
+                        <i class="fas fa-list-check text-indigo-500"></i> Desglose de Factores Críticos
+                    </h4>
+                    <div id="factorsList" class="space-y-2">
+                        <!-- Inyectado dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- Estrategias Tutoriales y Pedagógicas Recomendadas -->
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 mb-4">
+                    <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3 flex items-center gap-2">
+                        <i class="fas fa-lightbulb text-amber-500"></i> Plan de Intervención Tutorial
+                    </h4>
+                    <div id="recommendationsList" class="space-y-3">
+                        <!-- Inyectado dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- Botón de Exportar / Guardar -->
+                <div class="flex gap-2">
+                    <button onclick="saveEvaluation()" class="flex-1 bg-slate-800 hover:bg-slate-900 text-white font-medium py-3 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                        <i class="fas fa-save"></i> Guardar en Historial
+                    </button>
+                    <button onclick="window.print()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-3 rounded-xl text-xs font-medium transition">
+                        <i class="fas fa-print"></i>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Pestaña 3: Historial de Casos Evaluados -->
+            <div id="tab-history" class="tab-content hidden fade-in">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <h2 class="text-base font-bold text-slate-800">Registro de Alertas</h2>
+                        <p class="text-xs text-slate-500">Casos monitoreados en el plantel</p>
+                    </div>
+                    <button onclick="clearHistory()" class="text-xs text-rose-600 hover:text-rose-800 font-medium">
+                        Limpiar
+                    </button>
+                </div>
+
+                <!-- Lista de Registros -->
+                <div id="historyList" class="space-y-3">
+                    <!-- Se llena dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Pestaña 4: Información Ética y Neutralidad del Algoritmo -->
+            <div id="tab-info" class="tab-content hidden fade-in">
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 space-y-4 text-xs text-slate-600">
+                    <div class="flex items-center space-x-3 text-indigo-600 mb-2">
+                        <i class="fas fa-shield-alt text-2xl"></i>
+                        <h2 class="text-base font-bold text-slate-800">Principios Éticos y Metodología</h2>
+                    </div>
+
+                    <p>
+                        El objetivo de este **Sistema de Alerta Temprana** es brindar herramientas pedagógicas y preventivas al personal docente y de tutoría en la educación media superior para salvaguardar el derecho a la educación.
+                    </p>
+
+                    <div class="bg-indigo-50/70 p-3 rounded-xl border border-indigo-100">
+                        <h3 class="font-bold text-indigo-900 mb-1 flex items-center gap-1.5">
+                            <i class="fas fa-balance-scale"></i> Declaración de Neutralidad e Inclusión
+                        </h3>
+                        <p class="text-indigo-800 leading-relaxed">
+                            Las características personales o atributos de identidad protegidos (tales como la <strong>orientación sexual, identidad de género, etnicidad o religión</strong>) <u>no son procesados ni forman parte del cálculo matemático del algoritmo</u>.
+                        </p>
+                    </div>
+
+                    <h3 class="font-bold text-slate-800 text-sm pt-2">¿Cómo calcula el algoritmo la alerta?</h3>
+                    <p>
+                        El modelo predictivo pondera exclusivamente factores de riesgo académico, socioeconómico y de acompañamiento educativo sustentados en literatura pedagógica:
+                    </p>
+
+                    <ul class="list-disc pl-4 space-y-1 text-slate-600">
+                        <li><strong>Académico (40%):</strong> Asistencia, promedio y reprobación acumulada.</li>
+                        <li><strong>Socioeconómico y Laboral (35%):</strong> Carga horaria laboral, compatibilidad de horarios y distancia de traslado.</li>
+                        <li><strong>Apoyo y Entorno (25%):</strong> Respaldo de la red familiar y cargas extraordinarias de cuidado.</li>
+                    </ul>
+
+                    <div class="border-t border-slate-100 pt-3 text-[11px] text-slate-400">
+                        Diseñado para la atención oportuna y prevención de la deserción escolar en el nivel medio superior.
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Barra de Navegación Inferior Móvil (Bottom Nav) -->
+        <nav class="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-200 px-4 py-2 flex justify-around items-center z-20">
+            <button onclick="switchTab('eval')" id="nav-eval" class="nav-btn flex flex-col items-center text-indigo-600">
+                <i class="fas fa-edit text-lg"></i>
+                <span class="text-[10px] font-medium mt-0.5">Evaluar</span>
+            </button>
+            <button onclick="switchTab('result')" id="nav-result" class="nav-btn flex flex-col items-center text-slate-400 hover:text-slate-600">
+                <i class="fas fa-chart-pie text-lg"></i>
+                <span class="text-[10px] font-medium mt-0.5">Resultado</span>
+            </button>
+            <button onclick="switchTab('history')" id="nav-history" class="nav-btn flex flex-col items-center text-slate-400 hover:text-slate-600">
+                <i class="fas fa-history text-lg"></i>
+                <span class="text-[10px] font-medium mt-0.5">Historial</span>
+            </button>
+            <button onclick="switchTab('info')" id="nav-info" class="nav-btn flex flex-col items-center text-slate-400 hover:text-slate-600">
+                <i class="fas fa-shield-alt text-lg"></i>
+                <span class="text-[10px] font-medium mt-0.5">Ética/Info</span>
+            </button>
+        </nav>
+
+        <!-- Toast Notification Box -->
+        <div id="toast" class="fixed bottom-16 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white text-xs px-4 py-2 rounded-xl shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-30 flex items-center gap-2">
+            <i class="fas fa-check-circle text-green-400"></i>
+            <span id="toastMsg">Mensaje</span>
+        </div>
+
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Variables globales
+        let currentAssessment = null;
+        let gaugeChartInstance = null;
+        let evaluationsHistory = JSON.parse(sessionStorage.getItem('sat_evaluations_history') || '[]');
+
+        function escapeHtml(value) {
+            return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[char]));
+        }
+
+        // Inicializar al cargar la página
+        window.onload = function() {
+            // Cargar historial
+            renderHistory();
+        };
+
+        // Cambio de Pestañas
+        function switchTab(tabId) {
+            // Ocultar todas las pestañas
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+
+            // Mostrar la seleccionada
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            // Actualizar estilo de la barra de navegación
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-indigo-600');
+                btn.classList.add('text-slate-400');
+            });
+            const activeBtn = document.getElementById(`nav-${tabId}`);
+            if(activeBtn) {
+                activeBtn.classList.remove('text-slate-400');
+                activeBtn.classList.add('text-indigo-600');
+            }
+        }
+
+        // Mostrar Notificación Toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = message;
+            toast.classList.remove('opacity-0');
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+            }, 3000);
+        }
+
+        // Algoritmo de Cálculo de Riesgo
+        function calculateRisk(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('studentName').value.trim() || 'Estudiante Anónimo';
+            const semester = document.getElementById('semester').value;
+            const gpa = parseFloat(document.getElementById('gpa').value);
+            const attendance = parseInt(document.getElementById('attendance').value);
+            const failedSubjects = parseInt(document.getElementById('failedSubjects').value);
+            const workStatus = document.getElementById('workStatus').value;
+            const commute = document.getElementById('commute').value;
+            const economicStatus = document.getElementById('economicStatus').value;
+            const familySupport = document.getElementById('familySupport').value;
+            const caregiving = document.getElementById('caregiving').value;
+
+            let score = 0;
+            let criticalFactors = [];
+            let recommendations = [];
+
+            // 1. Evaluación Académica (Máx 40 pts)
+            // Promedio
+            if (gpa < 6.0) {
+                score += 18;
+                criticalFactors.push({ text: 'Promedio crítico (< 6.0)', type: 'high' });
+            } else if (gpa < 7.5) {
+                score += 10;
+                criticalFactors.push({ text: 'Promedio regular (6.0 - 7.4)', type: 'med' });
+            }
+
+            // Inasistencias
+            if (attendance === 3) {
+                score += 15;
+                criticalFactors.push({ text: 'Inasistencia severa (> 40%)', type: 'high' });
+            } else if (attendance === 2) {
+                score += 10;
+                criticalFactors.push({ text: 'Inasistencia moderada (21%-40%)', type: 'med' });
+            } else if (attendance === 1) {
+                score += 4;
+            }
+
+            // Materias Reprobadas
+            if (failedSubjects === 3) {
+                score += 15;
+                criticalFactors.push({ text: 'Alto índice de reprobación (5+ materias)', type: 'high' });
+            } else if (failedSubjects === 2) {
+                score += 10;
+                criticalFactors.push({ text: 'Reprobación de 3 a 4 materias', type: 'high' });
+            } else if (failedSubjects === 1) {
+                score += 5;
+                criticalFactors.push({ text: 'Reprobación ligera (1 a 2 materias)', type: 'med' });
+            }
+
+            // 2. Evaluación Socioeconómica y Laboral (Máx 35 pts)
+            if (workStatus === 'full') {
+                score += 18;
+                criticalFactors.push({ text: 'Jornada laboral completa (≥ 20 hrs/sem)', type: 'high' });
+            } else if (workStatus === 'part' || workStatus === 'informal') {
+                score += 10;
+                criticalFactors.push({ text: 'Combina estudios con empleo parcial/informal', type: 'med' });
+            }
+
+            if (commute === 'far') {
+                score += 10;
+                criticalFactors.push({ text: 'Traslado lejano al plantel (> 1 hora)', type: 'med' });
+            }
+
+            if (economicStatus === 'severe') {
+                score += 12;
+                criticalFactors.push({ text: 'Severa vulnerabilidad económica en el hogar', type: 'high' });
+            } else if (economicStatus === 'moderate') {
+                score += 5;
+            }
+
+            // 3. Evaluación Familiar y Cuidados (Máx 25 pts)
+            if (familySupport === 'low') {
+                score += 15;
+                criticalFactors.push({ text: 'Bajo o nulo apoyo/seguimiento familiar', type: 'high' });
+            } else if (familySupport === 'moderate') {
+                score += 6;
+            }
+
+            if (caregiving === 'heavy') {
+                score += 12;
+                criticalFactors.push({ text: 'Carga permanente de cuidados (hijos/familiares)', type: 'high' });
+            } else if (caregiving === 'moderate') {
+                score += 5;
+            }
+
+            // Normalización del puntaje a escala 0-100
+            score = Math.min(Math.round(score), 100);
+
+            // Determinar Categoría de Riesgo
+            let riskLevel = '';
+            let riskColor = '';
+            let riskBg = '';
+            let riskText = '';
+
+            if (score >= 60) {
+                riskLevel = 'Riesgo Alto';
+                riskColor = 'text-rose-600';
+                riskBg = 'bg-rose-100 text-rose-800 border-rose-300';
+                riskText = 'El estudiante presenta múltiples factores acumulados que comprometen de forma crítica su continuidad académica. Se requiere una intervención tutorial e institucional prioritaria e inmediata.';
+            } else if (score >= 30) {
+                riskLevel = 'Riesgo Medio';
+                riskColor = 'text-amber-600';
+                riskBg = 'bg-amber-100 text-amber-800 border-amber-300';
+                riskText = 'Se detectan factores de vulnerabilidad que requieren seguimiento focalizado y acompañamiento oportuno para evitar el escalamiento a deserción.';
+            } else {
+                riskLevel = 'Riesgo Bajo';
+                riskColor = 'text-emerald-600';
+                riskBg = 'bg-emerald-100 text-emerald-800 border-emerald-300';
+                riskText = 'El estudiante mantiene un nivel óptimo de estabilidad académica y personal. Se recomienda continuar con el monitoreo regular de trayectoria.';
+            }
+
+            // Generación de Recomendaciones Pedagógicas y Tutoriales
+            recommendations.push({
+                title: 'Acompañamiento Tutorial Directo',
+                desc: 'Entrevista individualizada con el tutor asignado para elaborar un plan de trabajo académico personalizado.',
+                icon: 'fa-user-clock',
+                color: 'text-indigo-600'
+            });
+
+            if (failedSubjects > 0 || gpa < 7.0) {
+                recommendations.push({
+                    title: 'Regularización Académica y Asesorías',
+                    desc: 'Inclusión prioritaria en círculos de estudio y asesorías par/materia para asignaturas en riesgo.',
+                    icon: 'fa-book-reader',
+                    color: 'text-blue-600'
+                });
+            }
+
+            if (workStatus !== 'none' || commute === 'far') {
+                recommendations.push({
+                    title: 'Flexibilidad y Ajuste de Horarios',
+                    desc: 'Evaluación de opciones de horarios flexibles, tolerancia de ingreso justificable y entrega adaptada de evidencias de aprendizaje.',
+                    icon: 'fa-business-time',
+                    color: 'text-emerald-600'
+                });
+            }
+
+            if (economicStatus === 'severe' || caregiving === 'heavy') {
+                recommendations.push({
+                    title: 'Canalización a Programas de Becas y Apoyo Social',
+                    desc: 'Gestión con el departamento de trabajo social para vinculación con becas de manutención y asistencia socioemocional.',
+                    icon: 'fa-hand-holding-heart',
+                    color: 'text-rose-600'
+                });
+            }
+
+            // Objeto de resultado
+            currentAssessment = {
+                id: Date.now(),
+                name: name,
+                semester: semester,
+                score: score,
+                riskLevel: riskLevel,
+                riskColor: riskColor,
+                riskBg: riskBg,
+                riskText: riskText,
+                factors: criticalFactors,
+                recommendations: recommendations,
+                date: new Date().toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' })
+            };
+
+            // Renderizar la Pestaña de Resultados
+            renderResults();
+            switchTab('result');
+        }
+
+        // Renderizar vista de resultados
+        function renderResults() {
+            if (!currentAssessment) return;
+
+            document.getElementById('studentDisplayName').innerText = `${currentAssessment.name} (${currentAssessment.semester}° Semestre)`;
+            document.getElementById('evalDate').innerText = currentAssessment.date;
+            document.getElementById('riskScoreNum').innerText = currentAssessment.score;
+            document.getElementById('riskDescription').innerText = currentAssessment.riskText;
+
+            // Banner superior de color
+            const banner = document.getElementById('riskBanner');
+            if (currentAssessment.score >= 60) banner.className = 'absolute top-0 left-0 right-0 h-2 bg-rose-500';
+            else if (currentAssessment.score >= 30) banner.className = 'absolute top-0 left-0 right-0 h-2 bg-amber-500';
+            else banner.className = 'absolute top-0 left-0 right-0 h-2 bg-emerald-500';
+
+            // Badge
+            const badge = document.getElementById('riskBadge');
+            badge.className = `mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border ${currentAssessment.riskBg}`;
+            badge.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${currentAssessment.riskLevel}`;
+
+            // Dibujar Gráfico Donut/Gauge
+            drawGaugeChart(currentAssessment.score);
+
+            // Renderizar Lista de Factores
+            const factorsContainer = document.getElementById('factorsList');
+            factorsContainer.innerHTML = '';
+            if (currentAssessment.factors.length === 0) {
+                factorsContainer.innerHTML = '<p class="text-xs text-slate-400 italic">No se detectaron factores de riesgo críticos significativos.</p>';
+            } else {
+                currentAssessment.factors.forEach(f => {
+                    const badgeColor = f.type === 'high' ? 'bg-rose-50 text-rose-700 border-rose-200' : 'bg-amber-50 text-amber-700 border-amber-200';
+                    const icon = f.type === 'high' ? 'fa-circle-exclamation text-rose-500' : 'fa-triangle-exclamation text-amber-500';
+                    factorsContainer.innerHTML += `
+                        <div class="p-2.5 rounded-xl border ${badgeColor} text-xs flex items-center justify-between">
+                            <span class="flex items-center gap-2 font-medium">
+                                <i class="fas ${icon}"></i> ${f.text}
+                            </span>
+                        </div>
+                    `;
+                });
+            }
+
+            // Renderizar Recomendaciones
+            const recContainer = document.getElementById('recommendationsList');
+            recContainer.innerHTML = '';
+            currentAssessment.recommendations.forEach(r => {
+                recContainer.innerHTML += `
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex items-start space-x-3">
+                        <div class="p-2 rounded-lg bg-white shadow-sm ${r.color} flex-shrink-0">
+                            <i class="fas ${r.icon} text-sm"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-xs font-bold text-slate-800">${r.title}</h5>
+                            <p class="text-[11px] text-slate-600 mt-0.5 leading-snug">${r.desc}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Gráfico Canvas Gauge usando Chart.js
+        function drawGaugeChart(score) {
+            const ctx = document.getElementById('riskGaugeCanvas').getContext('2d');
+            
+            if (gaugeChartInstance) {
+                gaugeChartInstance.destroy();
+            }
+
+            let mainColor = '#22c55e'; // Verde
+            if (score >= 60) mainColor = '#f43f5e'; // Rojo
+            else if (score >= 30) mainColor = '#f59e0b'; // Amarillo
+
+            gaugeChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [score, 100 - score],
+                        backgroundColor: [mainColor, '#e2e8f0'],
+                        borderWidth: 0,
+                    }]
+                },
+                options: {
+                    cutout: '82%',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: { enabled: false }
+                    }
+                }
+            });
+        }
+
+        // Guardar en Historial
+        function saveEvaluation() {
+            if (!currentAssessment) return;
+            
+            // Evitar duplicados consecutivos
+            if (!evaluationsHistory.some(item => item.id === currentAssessment.id)) {
+                evaluationsHistory.unshift(currentAssessment);
+                sessionStorage.setItem('sat_evaluations_history', JSON.stringify(evaluationsHistory));
+                renderHistory();
+                showToast('Evaluación guardada en el historial local');
+            } else {
+                showToast('Esta evaluación ya se encuentra guardada');
+            }
+        }
+
+        // Renderizar Historial
+        function renderHistory() {
+            const container = document.getElementById('historyList');
+            container.innerHTML = '';
+
+            if (evaluationsHistory.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-slate-400 text-xs">
+                        <i class="fas fa-folder-open text-3xl mb-2 text-slate-300"></i>
+                        <p>No hay evaluaciones guardadas aún.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            evaluationsHistory.forEach(item => {
+                let badgeClass = 'bg-emerald-100 text-emerald-800';
+                if (item.score >= 60) badgeClass = 'bg-rose-100 text-rose-800';
+                else if (item.score >= 30) badgeClass = 'bg-amber-100 text-amber-800';
+
+                container.innerHTML += `
+                    <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-2">
+                                <span class="font-bold text-xs text-slate-800">${escapeHtml(item.name)}</span>
+                                <span class="text-[10px] text-slate-400">(${item.semester}° Sem)</span>
+                            </div>
+                            <p class="text-[10px] text-slate-400">${item.date}</p>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xs font-extrabold px-2.5 py-1 rounded-full ${badgeClass}">
+                                ${item.score} pts
+                            </span>
+                            <button onclick='loadFromHistory(${item.id})' class="text-indigo-600 hover:text-indigo-800 text-xs font-medium">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Cargar caso del historial
+        function loadFromHistory(id) {
+            const found = evaluationsHistory.find(item => item.id === id);
+            if (found) {
+                currentAssessment = found;
+                renderResults();
+                switchTab('result');
+            }
+        }
+
+        // Limpiar Historial
+        function clearHistory() {
+            if (confirm('¿Desea borrar todo el historial de evaluaciones?')) {
+                evaluationsHistory = [];
+                sessionStorage.removeItem('sat_evaluations_history');
+                renderHistory();
+                showToast('Historial vaciado correctamente');
+            }
+        }
+    </script>
+</body>
+</html>
