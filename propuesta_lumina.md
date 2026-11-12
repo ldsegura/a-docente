@@ -1,14 +1,14 @@
-# A Tiempo
+# Lumina
 
 ## Una señal temprana puede abrir una conversación.
 
 **Propuesta de alerta temprana y acompañamiento humano para educación media superior**
 
-> **La idea en una frase:** A Tiempo ayuda a las escuelas a notar cambios en la trayectoria escolar y a ofrecer apoyo humano antes de que un estudiante deje de asistir.
+> **La idea en una frase:** Lumina ayuda al personal autorizado de Servicio Social del plantel a notar cambios en la trayectoria escolar y a ofrecer apoyo humano antes de que un estudiante deje de asistir.
 
 ## El cambio que proponemos
 
-Un estudiante empieza a faltar, baja su rendimiento o deja de entregar trabajos. Cada señal puede tener muchas explicaciones. A Tiempo ayuda a que esos cambios no se pierdan entre listas y carga de trabajo: organiza la información para que un adulto de confianza pueda acercarse, escuchar y explorar qué apoyo hace falta.
+Un estudiante empieza a faltar, baja su rendimiento o deja de entregar trabajos. Cada señal puede tener muchas explicaciones. Lumina ayuda a que esos cambios no se pierdan entre listas y carga de trabajo: organiza la información para que un adulto de confianza pueda acercarse, escuchar y explorar qué apoyo hace falta.
 
 > **La IA no decide qué le pasa al estudiante. Ayuda a que una persona llegue a tiempo a preguntar.**
 
@@ -16,10 +16,10 @@ Un estudiante empieza a faltar, baja su rendimiento o deja de entregar trabajos.
 
 ## 1. Cómo funcionaría
 
-A Tiempo convierte señales escolares en una invitación a revisar el caso con cuidado, no en una etiqueta sobre la persona.
+Lumina convierte señales escolares en una invitación a revisar el caso con cuidado, no en una etiqueta sobre la persona.
 
 1. **Observar cambios.** La escuela registra asistencia, tareas y calificaciones. Se consideran cambios relevantes en el tiempo, no una falta aislada.
-2. **Revisión humana.** El orientador ve qué señales activaron la alerta, verifica el contexto y decide si conviene acercarse al estudiante.
+2. **Revisión humana.** Servicio Social ve qué señales activaron la alerta, verifica el contexto y decide si conviene acercarse al estudiante.
 3. **Conversar en privado.** Un adulto de confianza pregunta cómo está y qué apoyo, si alguno, le sería útil. No presupone una causa.
 4. **Conectar con apoyo.** La escuela valora tutoría, apoyo económico disponible, transporte, flexibilidad académica o atención profesional, según el caso.
 5. **Dar seguimiento.** El personal autorizado registra solo lo necesario para saber si se ofreció el apoyo y si hace falta seguimiento.
@@ -39,7 +39,7 @@ El diseño debe proteger al estudiante de conclusiones apresuradas. La alerta se
 
 - Reunir señales escolares que podrían estar dispersas y destacar cambios que merecen revisión.
 - Explicar de forma legible qué señales dieron lugar a la alerta.
-- Resumir el caso para el orientador y presentar opciones de apoyo previamente aprobadas por la escuela.
+- Resumir el caso para Servicio Social y presentar opciones de apoyo previamente aprobadas por la escuela.
 - Ayudar a redactar un acercamiento respetuoso, que invite a conversar sin acusar ni revelar información privada.
 
 ### Lo que la IA no hace
@@ -56,7 +56,8 @@ El diseño debe proteger al estudiante de conclusiones apresuradas. La alerta se
 | Persona | Responsabilidad |
 |---|---|
 | Maestro | Aporta contexto educativo y observa cambios; no diagnostica. |
-| Orientador | Revisa la alerta, decide si acercarse y coordina seguimiento. |
+| Servicio Social | Usa el asistente, revisa la alerta y coordina el apoyo y seguimiento. |
+| Orientación | Atiende los casos que Servicio Social deriva por el canal del plantel. |
 | Psicología | Asesora sobre conversación, confidencialidad, señales de derivación y rutas profesionales. |
 | Estudiante | Puede explicar su situación y expresar qué tipo de apoyo desea, sin ser obligado a revelar información innecesaria. |
 
@@ -66,10 +67,10 @@ La demo muestra el paso de señales dispersas a una conversación humana. No sim
 
 ### Flujo sugerido
 
-1. Pantalla del orientador con tres perfiles ficticios identificados como `A-104`, `B-208` y `C-311`.
+1. Panel de Servicio Social con tres casos ficticios identificados como `A-104`, `B-208` y `C-311`.
 2. En `A-104`, la herramienta observa más ausencias y tareas no entregadas que en semanas anteriores.
-3. Aparece **“Revisar con el orientador”**, junto a las señales que motivaron la revisión y una nota: **“No se conoce la causa”**.
-4. El orientador elige **“Conversar en privado para conocer qué apoyo necesita”**.
+3. Aparece **“Revisar en Servicio Social”**, junto a las señales que motivaron la revisión y una nota: **“No se conoce la causa”**.
+4. Servicio Social elige **“Conversar en privado para conocer qué apoyo necesita”**.
 5. La siguiente pantalla ofrece apoyos posibles, sin asumir cuál corresponde: tutoría, explorar apoyos escolares disponibles o canalización humana.
 6. La demo termina con **“seguimiento acordado”** y deja claro quién puede ver el registro.
 
@@ -77,7 +78,7 @@ La demo muestra el paso de señales dispersas a una conversación humana. No sim
 
 ### Métricas para un piloto futuro
 
-- **Utilidad de alertas:** cuántas revisiones se consideran pertinentes por orientadores.
+- **Utilidad de alertas:** cuántas revisiones se consideran pertinentes por el equipo de Servicio Social.
 - **Tiempo hasta la revisión y el primer contacto**, medido de forma agregada.
 - **Tipo de apoyo ofrecido y aceptación voluntaria**, con acceso restringido.
 - **Errores y diferencias entre grupos:** a quién se alerta de más o de menos.
@@ -101,7 +102,7 @@ No. No diagnosticamos ni inferimos salud mental. Psicología asesora el protocol
 
 ### ¿Y si la causa es económica?
 
-No se infiere por las faltas. El orientador escucha al estudiante y, si quiere apoyo, explora opciones disponibles como becas, transporte o flexibilidad.
+No se infiere por las faltas. Servicio Social escucha al estudiante y, si quiere apoyo, explora opciones disponibles como becas, transporte o flexibilidad.
 
 ### ¿Tienen evidencia de que reducirá el abandono?
 
@@ -109,7 +110,7 @@ Aún no. El prototipo demuestra el flujo, no impacto probado. Un piloto debe med
 
 ### ¿Qué necesita del jurado?
 
-Apoyo para validar el flujo con una escuela, orientadores y estudiantes, y para definir criterios de privacidad, revisión y evaluación antes de un piloto.
+Apoyo para validar el flujo con una escuela, su equipo de Servicio Social y estudiantes, y para definir criterios de privacidad, revisión y evaluación antes de un piloto.
 
 ## 5. Evidencia y precisión del problema
 
@@ -133,4 +134,4 @@ El BID plantea que las alertas deben combinarse con respuestas que atiendan las 
 
 ### La promesa
 
-> A Tiempo no predice el futuro de un estudiante. Ayuda a que una señal no pase inadvertida y abre la posibilidad de una conversación antes de que sea tarde.
+> Lumina no predice el futuro de un estudiante. Ayuda a que una señal no pase inadvertida y abre la posibilidad de una conversación antes de que sea tarde.
