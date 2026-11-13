@@ -12,7 +12,7 @@ python3 -m http.server 8765 --directory landing
 
 Abre **[http://localhost:8765/](http://localhost:8765/)**. El archivo principal es [`landing/index.html`](landing/index.html). Si el puerto 8765 ya está ocupado, usa otro número en el comando y en la dirección.
 
-- **Conoce a Lumina** desplaza a los dos espacios reservados para los videos del equipo.
+- **Conoce a Lumina** desplaza a la sección de videos. El primero se abre en un modal al pulsar el play o **Ver video**; el segundo sigue reservado.
 - **Abrir la prueba** muestra [`landing/prueba.html`](landing/prueba.html) en un modal con iframe, sin salir de la landing. Se cierra con **Cerrar**, Escape o el botón Atrás.
 - La aplicación de prueba carga Tailwind, Chart.js, Font Awesome e Inter desde servicios externos; necesita conexión a internet para verse y funcionar por completo.
 
@@ -35,6 +35,6 @@ La [guía de contenido de IDEA](formato_entrega_idea.md) pide un único archivo 
 
 ## Pendientes antes de presentar
 
-- Integrar los videos cuando el equipo los entregue, con subtítulos y transcripción.
+- Integrar el segundo video cuando el equipo lo entregue. También faltan subtítulos y transcripción para el video disponible.
 - Confirmar la grafía definitiva del nombre: los documentos usan **Lumina**; en una petición inicial apareció **Lumnia**.
 - Revisar la aplicación de prueba antes de mostrarla como producto final: hoy calcula un “riesgo” con factores familiares y económicos, mientras la propuesta principal se centra en señales escolares explicables y revisión humana. Usar solo datos ficticios.

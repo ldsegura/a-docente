@@ -8,7 +8,7 @@
   <title>Lumina — Una señal puede abrir una conversación</title>
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
-  <script defer src="script.js?v=2"></script>
+  <script defer src="script.js?v=3"></script>
 </head>
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -71,17 +71,17 @@
 
     <section class="media-section section" id="videos" aria-labelledby="videos-title">
       <div class="container">
-        <div class="media-heading reveal"><div><span class="kicker">02 / CONOCE EL PROYECTO</span><h2 id="videos-title">Dos formas de conocer <span>a Lumina.</span></h2></div><p>Los videos del equipo se integrarán aquí. Mientras tanto, estos espacios muestran el recorrido que contará cada pieza.</p></div>
+        <div class="media-heading reveal"><div><span class="kicker">02 / CONOCE EL PROYECTO</span><h2 id="videos-title">Dos formas de conocer <span>a Lumina.</span></h2></div><p>Ya puedes ver la presentación del agente. El segundo espacio queda preparado para el video del caso.</p></div>
         <div class="video-grid">
           <article class="video-card reveal" aria-labelledby="video-one-title">
             <div class="video-poster agent-poster">
               <div class="poster-glow" aria-hidden="true"></div>
               <img src="assets/agent.svg" alt="" loading="lazy" width="520" height="560">
               <div class="poster-ui" aria-hidden="true"><span class="ui-line line-long"></span><span class="ui-line line-medium"></span><span class="ui-chart"><i></i><i></i><i></i><i></i><i></i></span></div>
-              <span class="video-label">ESPACIO RESERVADO · VIDEO 01</span>
-              <span class="play-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 6 10 6-10 6z"/></svg></span>
+              <span class="video-label">VIDEO 01 · DISPONIBLE</span>
+              <a class="video-open" href="assets/video_a.mp4" data-video-open aria-label="Reproducir video: Conoce a Lumina"><span class="play-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 6 10 6-10 6z"/></svg></span></a>
             </div>
-            <div class="video-info"><div><span class="card-overline">PRESENTACIÓN DEL AGENTE</span><h3 id="video-one-title">Conoce a Lumina</h3><p>Qué información organiza, cómo la explica y por qué la revisión siempre queda en manos de una persona.</p></div><span class="coming-soon">Video por integrar</span></div>
+            <div class="video-info"><div><span class="card-overline">PRESENTACIÓN DEL AGENTE</span><h3 id="video-one-title">Conoce a Lumina</h3><p>Qué información organiza, cómo la explica y por qué la revisión siempre queda en manos de una persona.</p></div><a class="coming-soon" href="assets/video_a.mp4" data-video-open>Ver video</a></div>
           </article>
           <article class="video-card reveal" aria-labelledby="video-two-title">
             <div class="video-poster demo-poster">
@@ -89,7 +89,7 @@
               <span class="video-label">ESPACIO RESERVADO · VIDEO 02</span>
               <span class="play-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 6 10 6-10 6z"/></svg></span>
             </div>
-            <div class="video-info"><div><span class="card-overline">DEMOSTRACIÓN DEL CASO</span><h3 id="video-two-title">De la señal al apoyo</h3><p>Un caso ficticio muestra cómo Servicio Social revisa los datos, conversa y acuerda un seguimiento.</p></div><span class="coming-soon">Video por integrar</span></div>
+            <div class="video-info"><div><span class="card-overline">DEMOSTRACIÓN DEL CASO</span><h3 id="video-two-title">De la señal al apoyo</h3><p>Un caso ficticio muestra cómo Servicio Social revisa los datos, conversa y acuerda un seguimiento.</p></div><button class="coming-soon" type="button" disabled title="Pendiente de recibir el segundo video">Video por integrar</button></div>
           </article>
         </div>
         <p class="media-footnote">Los indicadores y la ficha visibles en esta maqueta son ilustrativos y usan datos ficticios.</p>
@@ -113,6 +113,15 @@
         <button class="demo-close" type="button" aria-label="Cerrar la prueba" data-demo-close><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5 19 19M19 5 5 19"/></svg><span>Cerrar</span></button>
       </div>
       <iframe id="demo-frame" title="Prueba interactiva de Lumina" data-src="prueba.html?embed=1"></iframe>
+    </div>
+  </dialog>
+  <dialog class="demo-dialog video-dialog" id="video-dialog" aria-labelledby="video-dialog-title">
+    <div class="demo-dialog-shell">
+      <div class="demo-dialog-header">
+        <div><span class="demo-dialog-eyebrow">VIDEO 01 · PRESENTACIÓN</span><h2 id="video-dialog-title">Conoce a Lumina</h2></div>
+        <button class="demo-close" type="button" aria-label="Cerrar el video" data-video-close><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5 19 19M19 5 5 19"/></svg><span>Cerrar</span></button>
+      </div>
+      <video id="intro-video" controls playsinline preload="metadata"><source src="assets/video_a.mp4" type="video/mp4">Tu navegador no puede reproducir este video.</video>
     </div>
   </dialog>
 </body>

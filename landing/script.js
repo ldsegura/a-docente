@@ -26,6 +26,10 @@ const demoFrame = document.getElementById('demo-frame');
 const demoClose = demoDialog.querySelector('[data-demo-close]');
 demoDialog.dataset.ready = 'true';
 let demoTrigger = null;
+const videoDialog = document.getElementById('video-dialog');
+const videoClose = videoDialog.querySelector('[data-video-close]');
+const introVideo = document.getElementById('intro-video');
+let videoTrigger = null;
 
 function openDemo(pushHistory = true) {
   if (demoDialog.open) return;
@@ -61,5 +65,44 @@ demoDialog.addEventListener('click', (event) => {
 });
 window.addEventListener('popstate', (event) => {
   if (event.state?.luminaDemo) openDemo(false);
-  else closeDemo(true);
+  else if (event.state?.luminaVideo) openVideo(false);
+  else {
+    closeDemo(true);
+    closeVideo(true);
+  }
+});
+
+function openVideo(pushHistory = true) {
+  if (videoDialog.open) return;
+  videoDialog.showModal();
+  document.body.classList.add('demo-open');
+  videoClose.focus();
+  if (!prefersReducedMotion.matches) introVideo.play().catch(() => {});
+  if (pushHistory) history.pushState({ luminaVideo: true }, '', location.href);
+}
+
+function closeVideo(fromHistory = false) {
+  if (!videoDialog.open) return;
+  introVideo.pause();
+  introVideo.currentTime = 0;
+  videoDialog.close();
+  document.body.classList.remove('demo-open');
+  if (videoTrigger) videoTrigger.focus();
+  if (!fromHistory && history.state?.luminaVideo) history.back();
+}
+
+document.querySelectorAll('[data-video-open]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    videoTrigger = link;
+    openVideo();
+  });
+});
+videoClose.addEventListener('click', () => closeVideo());
+videoDialog.addEventListener('cancel', (event) => {
+  event.preventDefault();
+  closeVideo();
+});
+videoDialog.addEventListener('click', (event) => {
+  if (event.target === videoDialog) closeVideo();
 });
