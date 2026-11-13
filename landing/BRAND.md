@@ -32,7 +32,7 @@ La hoja de estilos pide Nunito para títulos y DM Sans para texto, con fuentes d
 
 ## Espacios para videos
 
-`index.html` incluye dos tarjetas con posters visuales. La primera reproduce `assets/video_a.mp4` en un modal propio que conserva el diseño del modal de la prueba. El botón de play y **Ver video** abren ese modal; al cerrarlo, la reproducción se detiene. La segunda tarjeta sigue reservada para el video del caso ficticio A-104. Cuando llegue, agregar su archivo, subtítulos `.vtt` y transcripción.
+`index.html` incluye dos tarjetas con posters visuales. La primera reproduce `assets/video_a2.mp4` en un modal propio que conserva el diseño del modal de la prueba. El botón de play y **Ver video** abren ese modal; al cerrarlo, la reproducción se detiene. La segunda tarjeta sigue reservada para el video del caso ficticio A-104. Cuando llegue, agregar su archivo, subtítulos `.vtt` y transcripción.
 
 ## Prueba interactiva
 
