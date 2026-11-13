@@ -1,6 +1,38 @@
 const revealItems = document.querySelectorAll('.reveal');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+const heroAgent = document.querySelector('.hero-art .agent');
+if (heroAgent) {
+  const eyes = heroAgent.querySelectorAll('[data-eye]');
+  let eyeFrame = 0;
+
+  function setEyePosition(x, y) {
+    cancelAnimationFrame(eyeFrame);
+    eyeFrame = requestAnimationFrame(() => {
+      eyes.forEach((eye) => {
+        eye.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    });
+  }
+
+  window.addEventListener('pointermove', (event) => {
+    if (event.pointerType !== 'mouse' || prefersReducedMotion.matches) return;
+    const bounds = heroAgent.getBoundingClientRect();
+    if (!bounds.width || !bounds.height) return;
+    const eyeCenterX = bounds.left + bounds.width / 2;
+    const eyeCenterY = bounds.top + bounds.height * (193 / 560);
+    const x = Math.max(-1, Math.min(1, (event.clientX - eyeCenterX) / (bounds.width * .65))) * 8;
+    const y = Math.max(-1, Math.min(1, (event.clientY - eyeCenterY) / (bounds.height * .65))) * 10;
+    setEyePosition(x, y);
+  }, { passive: true });
+
+  window.addEventListener('mouseout', (event) => {
+    if (!event.relatedTarget) setEyePosition(0, 0);
+  });
+  window.addEventListener('blur', () => setEyePosition(0, 0));
+  prefersReducedMotion.addEventListener('change', () => setEyePosition(0, 0));
+}
+
 if (!prefersReducedMotion.matches && 'IntersectionObserver' in window) {
   const observer = new IntersectionObserver((entries) => {
     for (const entry of entries) {
